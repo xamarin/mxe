@@ -1,20 +1,22 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := lua
+$(PKG)_WEBSITE  := https://www.lua.org/
+$(PKG)_DESCR    := Lua
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 5.3.2
+$(PKG)_VERSION  := 5.3.3
 # Shared version and luarocks subdir
 $(PKG)_SHORTVER := $(call SHORT_PKG_VERSION,$(PKG))
-$(PKG)_CHECKSUM := c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f
+$(PKG)_DLLVER   := $(subst .,,$($(PKG)_SHORTVER))
+$(PKG)_CHECKSUM := 5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2
 $(PKG)_SUBDIR   := lua-$($(PKG)_VERSION)
 $(PKG)_FILE     := lua-$($(PKG)_VERSION).tar.gz
-$(PKG)_URL      := http://www.lua.org/ftp/$($(PKG)_FILE)
+$(PKG)_URL      := https://www.lua.org/ftp/$($(PKG)_FILE)
 $(PKG)_DEPS     := gcc
 $(PKG)_DEPS_$(BUILD) :=
 
 define $(PKG)_UPDATE
-    $(WGET) -q -O- 'http://www.lua.org/download.html' | \
+    $(WGET) -q -O- 'https://www.lua.org/download.html' | \
     $(SED) -n 's,.*lua-\([0-9][^>]*\)\.tar.*,\1,p' | \
     head -1
 endef
@@ -34,7 +36,7 @@ define $(PKG)_BUILD_COMMON
 
     '$(TARGET)-gcc' \
         -W -Wall -Werror -ansi -pedantic \
-        '$(2).c' -o '$(PREFIX)/$(TARGET)/bin/test-lua.exe' \
+        '$(TEST_FILE)' -o '$(PREFIX)/$(TARGET)/bin/test-lua.exe' \
         `$(TARGET)-pkg-config --libs lua`
 endef
 
@@ -66,12 +68,12 @@ define $(PKG)_BUILD_SHARED
         AR='$(TARGET)-gcc -Wl,--out-implib,liblua.dll.a -shared -o' \
         RANLIB='echo skipped ranlib' \
         SYSCFLAGS='-DLUA_BUILD_AS_DLL' \
-        LUA_A=liblua$($(PKG)_SHORTVER).dll \
+        LUA_A=lua$($(PKG)_DLLVER).dll \
         a lua
     $(MAKE) -C '$(1)' -j 1 \
         INSTALL_TOP='$(PREFIX)/$(TARGET)' \
         INSTALL_MAN='$(1)/noinstall' \
-        TO_BIN='liblua$($(PKG)_SHORTVER).dll' \
+        TO_BIN='lua$($(PKG)_DLLVER).dll' \
         INSTALL='$(INSTALL)' \
         TO_LIB='liblua.dll.a' \
         install

@@ -1,7 +1,7 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := libass
+$(PKG)_WEBSITE  := https://code.google.com/p/libass/
 $(PKG)_IGNORE   :=
 # remove autoreconf step after 0.13.1
 # https://github.com/libass/libass/issues/209
@@ -32,6 +32,6 @@ define $(PKG)_BUILD
 
     '$(TARGET)-gcc' \
         -W -Wall -Werror -ansi -pedantic \
-        '$(2).c' -o '$(PREFIX)/$(TARGET)/bin/test-libass.exe' \
+        '$(TEST_FILE)' -o '$(PREFIX)/$(TARGET)/bin/test-libass.exe' \
         `'$(TARGET)-pkg-config' libass --cflags --libs`
 endef

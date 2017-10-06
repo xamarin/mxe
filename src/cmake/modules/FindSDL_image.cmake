@@ -1,5 +1,4 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 message("== Custom MXE File: " ${CMAKE_CURRENT_LIST_FILE})
 
@@ -9,7 +8,7 @@ endif()
 
 pkg_check_modules(SDL_IMAGE SDL_image)
 
-# for backward compatiblity
+# for backward compatibility
 set(SDLIMAGE_LIBRARY ${SDL_IMAGE_LIBRARIES})
 set(SDL_IMAGE_LIBRARY ${SDL_IMAGE_LIBRARIES})
 set(SDLIMAGE_INCLUDE_DIR ${SDL_IMAGE_INCLUDE_DIRS})

@@ -1,5 +1,4 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 message("== Custom MXE File: " ${CMAKE_CURRENT_LIST_FILE})
 
@@ -9,7 +8,7 @@ endif()
 
 pkg_check_modules(FRIBIDI fribidi)
 
-# for backward compatiblity
+# for backward compatibility
 set(FRIBIDI_LIBRARY ${FRIBIDI_LIBRARIES})
 set(FRIBIDI_INCLUDE_DIR ${FRIBIDI_INCLUDE_DIRS})
 set(FRIBIDI_VERSION_STRING ${FRIBIDI_VERSION})

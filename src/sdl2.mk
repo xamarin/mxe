@@ -1,17 +1,18 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := sdl2
+$(PKG)_WEBSITE  := https://www.libsdl.org/
+$(PKG)_DESCR    := SDL2
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 2.0.4
-$(PKG)_CHECKSUM := da55e540bf6331824153805d58b590a29c39d2d506c6d02fa409aedeab21174b
+$(PKG)_VERSION  := 2.0.6
+$(PKG)_CHECKSUM := 03658b5660d16d7b31263a691e058ed37acdab155d68dabbad79998fb552c5df
 $(PKG)_SUBDIR   := SDL2-$($(PKG)_VERSION)
 $(PKG)_FILE     := SDL2-$($(PKG)_VERSION).tar.gz
-$(PKG)_URL      := http://www.libsdl.org/release/$($(PKG)_FILE)
+$(PKG)_URL      := https://www.libsdl.org/release/$($(PKG)_FILE)
 $(PKG)_DEPS     := gcc libiconv
 
 define $(PKG)_UPDATE
-    $(WGET) -q -O- 'http://hg.libsdl.org/SDL/tags' | \
+    $(WGET) -q -O- 'https://hg.libsdl.org/SDL/tags' | \
     $(SED) -n 's,.*release-\([0-9][^<]*\).*,\1,p' | \
     head -1
 endef
@@ -30,7 +31,7 @@ define $(PKG)_BUILD
 
     '$(TARGET)-gcc' \
         -W -Wall -Werror -ansi -pedantic \
-        '$(2).c' -o '$(PREFIX)/$(TARGET)/bin/test-sdl2.exe' \
+        '$(TEST_FILE)' -o '$(PREFIX)/$(TARGET)/bin/test-sdl2.exe' \
         `'$(TARGET)-pkg-config' sdl2 --cflags --libs`
 
 endef

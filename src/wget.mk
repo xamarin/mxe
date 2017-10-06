@@ -1,23 +1,21 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := wget
-$(PKG)_VERSION  := 1.17.1
-$(PKG)_CHECKSUM := fe559b61eb9cc01635ac6206a14e02cb51591838c35fa83c7a4aacae0bdd97c9
+$(PKG)_WEBSITE  := https://www.gnu.org/software/wget/
+$(PKG)_VERSION  := 1.19.1
+$(PKG)_CHECKSUM := 0c950b9671881222a4d385b013c9604e98a8025d1988529dfca0e93617744cd2
 $(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.xz
-$(PKG)_URL      := http://ftp.gnu.org/gnu/$(PKG)/$($(PKG)_FILE)
+$(PKG)_URL      := https://ftp.gnu.org/gnu/$(PKG)/$($(PKG)_FILE)
 $(PKG)_DEPS     := gcc gnutls libidn libntlm pthreads
 
 define $(PKG)_UPDATE
-    $(WGET) -q -O- 'http://git.savannah.gnu.org/cgit/wget.git/refs/' | \
-    $(SED) -n "s,.*<a href='/cgit/wget.git/tag/?id=v\([0-9.]*\)'>.*,\1,p" | \
+    $(WGET) -q -O- 'https://git.savannah.gnu.org/cgit/wget.git/refs/' | \
+    $(SED) -n "s,.*<a href='/cgit/wget.git/tag/?h=v\([0-9.]*\)'>.*,\1,p" | \
     head -1
 endef
 
 define $(PKG)_BUILD
-    # avoid conflict with base64_encode from gnutls
-    $(if $(BUILD_STATIC), $(SED) -i 's/^base64_encode /wget_base64_encode /;' '$(1)/src/utils.c')
     cd '$(1)' && ./configure \
         $(MXE_CONFIGURE_OPTS) \
         --with-ssl=gnutls \

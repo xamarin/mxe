@@ -1,9 +1,8 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 # MXE provides a fully featured build of Qt. Some users want more control...
-# http://lists.nongnu.org/archive/html/mingw-cross-env-list/2013-08/msg00010.html
-# http://lists.nongnu.org/archive/html/mingw-cross-env-list/2012-05/msg00019.html
+# https://lists.nongnu.org/archive/html/mingw-cross-env-list/2013-08/msg00010.html
+# https://lists.nongnu.org/archive/html/mingw-cross-env-list/2012-05/msg00019.html
 #
 # build of qt and deps is (say):  25 mins with 12.5 MB test program
 # custom with minimal deps is:     4 mins with  7.6 MB test program
@@ -75,9 +74,10 @@ define qt_BUILD
     $(MAKE) -C '$(1)' -j '$(JOBS)'
     rm -rf '$(PREFIX)/$(TARGET)/qt'
     $(MAKE) -C '$(1)' -j 1 install
+    ln -sf '$(PREFIX)/$(TARGET)/qt/bin/qmake' '$(PREFIX)/bin/$(TARGET)'-qmake-qt4
 
     mkdir            '$(1)/test-qt'
-    cd               '$(1)/test-qt' && '$(PREFIX)/$(TARGET)/qt/bin/qmake' '$(PWD)/$(2).pro'
+    cd               '$(1)/test-qt' && '$(PREFIX)/$(TARGET)/qt/bin/qmake' '$(PWD)/src/$(PKG)-test.pro'
     $(MAKE)       -C '$(1)/test-qt' -j '$(JOBS)'
     $(INSTALL) -m755 '$(1)/test-qt/release/test-qt.exe' '$(PREFIX)/$(TARGET)/bin/'
 

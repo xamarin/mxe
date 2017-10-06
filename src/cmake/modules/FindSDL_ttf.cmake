@@ -1,5 +1,4 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 message("== Custom MXE File: " ${CMAKE_CURRENT_LIST_FILE})
 
@@ -9,10 +8,10 @@ endif()
 
 pkg_check_modules(SDL_TTF SDL_ttf)
 
-#compatiblity
+#compatibility
 set(SDL_TTF_VERSION_STRING ${SDL_TTF_VERSION})
 
-# for backward compatiblity
+# for backward compatibility
 set(SDLTTF_LIBRARY ${SDL_TTF_LIBRARIES})
 set(SDLTTF_INCLUDE_DIR ${SDL_TTF_INCLUDE_DIRS})
 set(SDLTTF_FOUND ${SDL_TTF_FOUND})

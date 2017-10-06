@@ -1,11 +1,12 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := ossim
+$(PKG)_WEBSITE  := https://trac.osgeo.org/ossim
+$(PKG)_DESCR    := OSSIM
 $(PKG)_IGNORE   :=
 $(PKG)_VERSION  := 1.8.20
-$(PKG)_CHECKSUM := a9148cbc7eebaed1d09d139e68c038592edcf74318ec2623f21494aa56879f52
-$(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)-1
+$(PKG)_CHECKSUM := d7981d0d7e84bdbc26d5bda9e5b80c583d806164e4d6e5fab276c9255a2b407c
+$(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)-3
 $(PKG)_FILE     := $($(PKG)_SUBDIR).tar.gz
 $(PKG)_URL      := http://download.osgeo.org/ossim/source/$(PKG)-$($(PKG)_VERSION)/$($(PKG)_FILE)
 $(PKG)_DEPS     := gcc freetype geos jpeg libgeotiff libpng openthreads proj tiff zlib
@@ -19,7 +20,6 @@ endef
 define $(PKG)_BUILD
     mkdir '$(1).build'
     cd '$(1).build' && '$(TARGET)-cmake' \
-        -DBUILD_SHARED_LIBS=$(CMAKE_SHARED_BOOL) \
         -DCMAKE_VERBOSE_MAKEFILE=TRUE \
         -DPKG_CONFIG_EXECUTABLE='$(PREFIX)/bin/$(TARGET)-pkg-config' \
         -DCMAKE_MODULE_PATH='$(1)/ossim_package_support/cmake/CMakeModules' \

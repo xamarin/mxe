@@ -1,19 +1,19 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := x264
+$(PKG)_WEBSITE  := https://www.videolan.org/developers/x264.html
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 20151011-2245
-$(PKG)_CHECKSUM := 80a4075ea12a81ec3b6c493e03529c5b7c1afb34c6e91d86bb078bc2ead2ccf0
+$(PKG)_VERSION  := 20161130-2245
+$(PKG)_CHECKSUM := 0825e14945bc373107f9a00e66d45d5389bb86368efd834b92c52cddb2ded1d8
 $(PKG)_SUBDIR   := $(PKG)-snapshot-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG)-snapshot-$($(PKG)_VERSION).tar.bz2
-$(PKG)_URL      := http://download.videolan.org/pub/videolan/$(PKG)/snapshots/$($(PKG)_FILE)
-$(PKG)_DEPS     := gcc yasm liblsmash
+$(PKG)_URL      := https://download.videolan.org/pub/videolan/$(PKG)/snapshots/$($(PKG)_FILE)
+$(PKG)_DEPS     := gcc liblsmash yasm
 
 define $(PKG)_UPDATE
-    $(WGET) -q -O- 'http://git.videolan.org/?p=x264.git;a=shortlog' | \
+    $(WGET) -q -O- 'https://git.videolan.org/?p=x264.git;a=shortlog' | \
     $(SED) -n 's,.*\([0-9]\{4\}\)-\([0-9]\{2\}\)-\([0-9]\{2\}\).*,\1\2\3-2245,p' | \
-    sort | \
+    $(SORT) | \
     tail -1
 endef
 

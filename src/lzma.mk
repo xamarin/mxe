@@ -1,12 +1,13 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := lzma
+$(PKG)_WEBSITE  := http://www.7-zip.org/sdk.html
+$(PKG)_DESCR    := LZMA SDK
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 920
-$(PKG)_CHECKSUM := 8ac221acdca8b6f6dd110120763af42b3707363752fc04e63c7bbff76774a445
+$(PKG)_VERSION  := 1701
+$(PKG)_CHECKSUM := 0daa0a15a3a2b6a8c9459744e4a25f7a26fdae0e9e406e0ac0809c3fbbacf2e4
 $(PKG)_SUBDIR   := .
-$(PKG)_FILE     := lzma$(subst .,,$($(PKG)_VERSION)).tar.bz2
+$(PKG)_FILE     := lzma$(subst .,,$($(PKG)_VERSION)).7z
 $(PKG)_URL      := http://www.7-zip.org/a/$($(PKG)_FILE)
 $(PKG)_DEPS     := gcc
 $(PKG)_DEPS_$(BUILD) :=
@@ -14,7 +15,7 @@ $(PKG)_TARGETS  := $(BUILD) $(MXE_TARGETS)
 
 define $(PKG)_UPDATE
     $(WGET) -q -O- 'http://www.7-zip.org/sdk.html' | \
-    $(SED) -n 's,.*lzma\([0-9][^"]*\)\.tar.*,\1,p' | \
+    $(SED) -n 's,.*lzma\([0-9][^"]*\)\.7z.*,\1,p' | \
     head -1
 endef
 

@@ -1,5 +1,4 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := intltool
 $(PKG)_IGNORE   :=
@@ -8,7 +7,7 @@ $(PKG)_CHECKSUM := 67f25c5c6fb71d095793a7f895b245e65e829e8bde68c6c8b4c912144ff34
 $(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.gz
 $(PKG)_URL      := https://launchpad.net/intltool/trunk/$($(PKG)_VERSION)/+download/$($(PKG)_FILE)
-$(PKG)_WEBSITE  := http://freedesktop.org/wiki/Software/intltool
+$(PKG)_WEBSITE  := https://freedesktop.org/wiki/Software/intltool
 $(PKG)_OWNER    := https://github.com/tonytheodore
 $(PKG)_TARGETS  := $(BUILD)
 $(PKG)_DEPS     :=

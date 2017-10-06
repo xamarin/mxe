@@ -1,5 +1,4 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 # Source: https://github.com/mxe/mxe/issues/1185
 
@@ -23,9 +22,12 @@ target_link_libraries(
     png
     glib-2.0
     winmm
+    dwmapi
+    uxtheme
     ws2_32
     intl
     iconv
-    pcre16
+    pcre2-16
+    version
     z
 )

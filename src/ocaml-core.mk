@@ -1,7 +1,8 @@
-# This file is part of MXE.
-# See index.html for further information.
+# This file is part of MXE. See LICENSE.md for licensing information.
 
 PKG             := ocaml-core
+$(PKG)_WEBSITE  := https://caml.inria.fr/
+$(PKG)_DESCR    := ocaml
 $(PKG)_IGNORE    = $(ocaml-native_IGNORE)
 $(PKG)_VERSION   = $(ocaml-native_VERSION)
 $(PKG)_CHECKSUM  = $(ocaml-native_CHECKSUM)
@@ -40,7 +41,7 @@ define $(PKG)_BUILD
     # overwriting the binary versions which ship with the compiler with
     # ones that contain the filename-win32-dirsep patch.
     $(MAKE) -C '$(1)' -j 1 coreboot
-    # second time, otherwise Segfault in some cases (depending on the runing system?)
+    # second time, otherwise Segfault in some cases (depending on the running system?)
     $(MAKE) -C '$(1)' -j 1 coreboot
     $(MAKE) -C '$(1)' -j 1 all
     # install ocamldoc and camlp4 (non cross versions)
@@ -113,10 +114,10 @@ define $(PKG)_BUILD
     done
 
     # test ocamlopt
-    cp '$(2).ml' '$(1)/test.ml'
+    cp '$(TEST_FILE)' '$(1)/test.ml'
     cd '$(1)' && '$(TARGET)-ocamlopt' test.ml
     # test ocamlbuild from package ocaml-native, now that ocamlopt works
-    mkdir '$(1)/tmp' && cp '$(2).ml' '$(1)/tmp/test.ml'
+    mkdir '$(1)/tmp' && cp '$(TEST_FILE)' '$(1)/tmp/test.ml'
     cd '$(1)/tmp' && $(TARGET)-ocamlbuild test.native
 endef
 
